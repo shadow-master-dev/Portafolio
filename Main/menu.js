@@ -1,11 +1,11 @@
+// Mapa global para que breadcrumb lo use
+const breadcrumbMap = {};
+
 function renderMenu(menuData) {
   const sidebar = document.getElementById("sidebarMenu");
   sidebar.innerHTML = "";
 
-  if (!menuData || !Array.isArray(menuData)) {
-    console.error("⚠️ MenuData no es válido:", menuData);
-    return;
-  }
+  if (!menuData || !Array.isArray(menuData)) return;
 
   menuData.forEach(g => {
     const liTitle = document.createElement("li");
@@ -28,6 +28,13 @@ function renderMenu(menuData) {
         ulSub.className = "treeview-menu";
 
         m.submenus.forEach(sub => {
+          // 👇 guardar ruta en breadcrumbMap
+          breadcrumbMap[sub.accion] = {
+            nombre: sub.nombre,
+            grupo: g.nombre,
+            padre: m.nombre
+          };
+
           const liSub = document.createElement("li");
           liSub.innerHTML = `
             <a href="${baseUrl}?page=${sub.accion}">
@@ -40,7 +47,14 @@ function renderMenu(menuData) {
 
         li.appendChild(ulSub);
         sidebar.appendChild(li);
+
       } else {
+        // 👇 guardar ruta en breadcrumbMap
+        breadcrumbMap[m.accion] = {
+          nombre: m.nombre,
+          grupo: g.nombre
+        };
+
         const li = document.createElement("li");
         li.innerHTML = `
           <a href="${baseUrl}?page=${m.accion}">
