@@ -1,5 +1,3 @@
-const baseUrl = "<?= baseUrl ?>";
-
 function renderMenu(menuData) {
   const sidebar = document.getElementById("sidebarMenu");
   sidebar.innerHTML = "";
