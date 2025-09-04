@@ -1,11 +1,6 @@
-// Mapa global para que breadcrumb lo use
-const breadcrumbMap = {};
-
 function renderMenu(menuData) {
   const sidebar = document.getElementById("sidebarMenu");
   sidebar.innerHTML = "";
-
-  if (!menuData || !Array.isArray(menuData)) return;
 
   menuData.forEach(g => {
     const liTitle = document.createElement("li");
@@ -18,7 +13,7 @@ function renderMenu(menuData) {
         const li = document.createElement("li");
         li.className = "treeview";
         li.innerHTML = `
-          <a href="#!">
+          <a href="#!" onclick="updateBreadcrumb('${g.nombre}', '${m.nombre}')">
             <i class="bi ${m.icono}"></i>
             <span class="menu-text">${m.nombre}</span>
           </a>
@@ -28,16 +23,10 @@ function renderMenu(menuData) {
         ulSub.className = "treeview-menu";
 
         m.submenus.forEach(sub => {
-          // 👇 guardar ruta en breadcrumbMap
-          breadcrumbMap[sub.accion] = {
-            nombre: sub.nombre,
-            grupo: g.nombre,
-            padre: m.nombre
-          };
-
           const liSub = document.createElement("li");
           liSub.innerHTML = `
-            <a href="${baseUrl}?page=${sub.accion}">
+            <a href="${baseUrl}?page=${sub.accion}" 
+               onclick="updateBreadcrumb('${g.nombre}', '${m.nombre}', '${sub.nombre}')">
               <i class="bi ${sub.icono}"></i>
               ${sub.nombre}
             </a>
@@ -49,15 +38,10 @@ function renderMenu(menuData) {
         sidebar.appendChild(li);
 
       } else {
-        // 👇 guardar ruta en breadcrumbMap
-        breadcrumbMap[m.accion] = {
-          nombre: m.nombre,
-          grupo: g.nombre
-        };
-
         const li = document.createElement("li");
         li.innerHTML = `
-          <a href="${baseUrl}?page=${m.accion}">
+          <a href="${baseUrl}?page=${m.accion}" 
+             onclick="updateBreadcrumb('${g.nombre}', '${m.nombre}')">
             <i class="bi ${m.icono}"></i>
             <span class="menu-text">${m.nombre}</span>
           </a>
