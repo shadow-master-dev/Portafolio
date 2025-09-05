@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ Página inicializada");
+  console.log("✅ Página inicializada con cards vacíos");
 
-  // Datos de prueba (mock)
+  // Datos de prueba
+  const mockBusqueda = { nombre: "Ejemplo de búsqueda" };
 
-  const mockBusqueda = { nombre: "Resultado de prueba" };
-
-  // Renderizar los cards
-
+  // Renderizar los cards vacíos
   mostrarBusqueda(mockBusqueda);
+  mostrarCard1();
+  mostrarCard2();
 });
