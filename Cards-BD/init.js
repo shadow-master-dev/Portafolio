@@ -58,8 +58,7 @@ function setUserHeader(data) {
   document.getElementById("user-nombre").textContent = u.nombre || u.username || "Sin nombre";
   document.getElementById("user-rol").textContent = u.rol || "Usuario";
 
-
-    // 🔹 Datos de prueba o de tu servidor
+  // 🔹 Datos de prueba o de tu servidor
   const mockBusqueda = { 
     titulo: "Búsqueda de Usuarios", 
     descripcion: "Resultados encontrados para la búsqueda." 
@@ -67,5 +66,4 @@ function setUserHeader(data) {
 
   // 🔹 Renderizar el nuevo card de búsqueda
   mostrarBusqueda(mockBusqueda);
-}
 }
