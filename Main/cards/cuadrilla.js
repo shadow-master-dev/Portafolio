@@ -1,4 +1,38 @@
 <script>
+function renderCuadrillaCard(cuadrilla, usuarioActivo) {
+  const container = document.getElementById("cuadrilla-container");
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="card-title mb-0">Mi Cuadrilla</h5>
+        <span id="cuadrilla-estado-badge" class="badge rounded-pill"></span>
+      </div>
+      <div class="card-body" id="cuadrilla-card"></div>
+    </div>
+  `;
+
+  mostrarCuadrilla(cuadrilla, usuarioActivo);
+
+  // Manejar chevron al expandir/colapsar
+  container.addEventListener("shown.bs.collapse", e => {
+    const chevron = e.target.closest(".accordion-item").querySelector(".chevron");
+    if (chevron) {
+      chevron.classList.remove("fa-chevron-down");
+      chevron.classList.add("fa-chevron-up");
+    }
+  });
+
+  container.addEventListener("hidden.bs.collapse", e => {
+    const chevron = e.target.closest(".accordion-item").querySelector(".chevron");
+    if (chevron) {
+      chevron.classList.remove("fa-chevron-up");
+      chevron.classList.add("fa-chevron-down");
+    }
+  });
+}
+
 function mostrarCuadrilla(cuadrilla, usuarioActivo) {
   const card = document.getElementById("cuadrilla-card");
   const badge = document.getElementById("cuadrilla-estado-badge");
@@ -19,7 +53,7 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
       <h6 class="fw-semibold mb-1">${cuadrilla.nombre_cuadrilla || "-"}</h6>
       <p class="mb-1"><small>Rol en cuadrilla: ${cuadrilla.rol_en_cuadrilla || "-"}</small></p>
       <p class="mb-3"><small>Inicio: ${formatFecha(cuadrilla.fecha_inicio)}</small></p>
-      <h6 class="fw-semibold mb-3">Integrantes</h6>
+      <h6 class="fw-semibold">Integrantes</h6>
     `;
 
     if (cuadrilla.integrantes && cuadrilla.integrantes.length > 0) {
@@ -41,37 +75,34 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
         html += `
           <div class="accordion-item shadow-sm mb-3 rounded-4 overflow-hidden">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button"
+              <button class="accordion-button collapsed d-flex align-items-center" type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#${collapseId}"
                       aria-expanded="false"
                       aria-controls="${collapseId}">
-                <div class="d-flex align-items-center w-100">
-                  <div class="icon-box lg bg-primary-subtle rounded-circle me-3">
-                    ${getIconOrFoto(emp, 40)}
-                  </div>
-                  <div>
-                    <h6 class="mb-0">${emp.nombre || "-"}</h6>
-                    <p class="mb-0 small text-muted">${emp.rol_en_cuadrilla || emp.rol || "-"}</p>
-                  </div>
-                  ${esUsuarioActivo ? `<span class="ms-auto badge bg-primary-subtle text-primary rounded-pill px-3 me-2">Tú</span>` : ""}
-                  ${esLider ? `<span class="ms-auto badge bg-warning text-dark rounded-pill px-3 me-2">Líder</span>` : ""}
+                <div class="icon-box lg bg-primary-subtle rounded-circle me-3">
+                  ${getIconOrFoto(emp, 44)}
                 </div>
+                <div class="flex-grow-1">
+                  <h6 class="mb-0">${emp.nombre || "-"}</h6>
+                  <small class="text-muted">${emp.rol_en_cuadrilla || emp.rol || "-"}</small>
+                </div>
+                ${esUsuarioActivo ? `<span class="badge bg-primary-subtle text-primary rounded-pill px-3 me-2">Tú</span>` : ""}
+                ${esLider ? `<span class="badge bg-warning text-dark rounded-pill px-3 me-2">Líder</span>` : ""}
+                <i class="fa-solid fa-chevron-down text-muted ms-2 chevron"></i>
               </button>
             </h2>
-            <div id="${collapseId}" class="accordion-collapse collapse" data-bs-parent="#accordionCuadrilla">
+            <div id="${collapseId}" class="accordion-collapse collapse">
               <div class="accordion-body bg-light-subtle">
-                <div class="p-3 rounded-3 border border-secondary">
-                  <small><i class="fa-solid fa-id-card me-1"></i> <b>DNI:</b> ${emp.dni || "-"}</small><br>
-                  <small><i class="fa-solid fa-location-dot me-1"></i> <b>Dirección:</b> ${emp.direccion || "-"}</small><br>
-                  <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small><br>
-                  <hr class="my-1">
-                  <small><i class="fa-solid fa-shirt me-1"></i> <b>Polo:</b> ${emp.talla_polo || "-"}</small><br>
-                  <small><i class="fa-solid fa-person me-1"></i> <b>Chaleco:</b> ${emp.talla_chaleco || "-"}</small><br>
-                  <small><i class="fa-solid fa-user-tie me-1"></i> <b>Casaca:</b> ${emp.talla_casaca || "-"}</small><br>
-                  <small><i class="fa-solid fa-ruler-combined me-1"></i> <b>Pantalón:</b> ${emp.talla_pantalon || "-"}</small><br>
-                  <small><i class="fa-solid fa-shoe-prints me-1"></i> <b>Bota:</b> ${emp.talla_bota || "-"}</small>
-                </div>
+                <small><i class="fa-solid fa-id-card me-1"></i> <b>DNI:</b> ${emp.dni || "-"}</small><br>
+                <small><i class="fa-solid fa-location-dot me-1"></i> <b>Dirección:</b> ${emp.direccion || "-"}</small><br>
+                <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small><br>
+                <hr class="my-1">
+                <small><i class="fa-solid fa-shirt me-1"></i> <b>Polo:</b> ${emp.talla_polo || "-"}</small><br>
+                <small><i class="fa-solid fa-person me-1"></i> <b>Chaleco:</b> ${emp.talla_chaleco || "-"}</small><br>
+                <small><i class="fa-solid fa-user-tie me-1"></i> <b>Casaca:</b> ${emp.talla_casaca || "-"}</small><br>
+                <small><i class="fa-solid fa-ruler-combined me-1"></i> <b>Pantalón:</b> ${emp.talla_pantalon || "-"}</small><br>
+                <small><i class="fa-solid fa-shoe-prints me-1"></i> <b>Bota:</b> ${emp.talla_bota || "-"}</small>
               </div>
             </div>
           </div>
@@ -92,5 +123,6 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
     card.innerHTML = `<p class="text-muted">No pertenece a ninguna cuadrilla</p>`;
   }
 }
+
 
 </script>
