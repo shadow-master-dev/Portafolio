@@ -1,6 +1,3 @@
-<script>
-// cuadrilla.js
-
 function renderCuadrillaCard(cuadrilla, usuarioActivo) {
   const container = document.getElementById("cuadrilla-container");
   if (!container) return;
@@ -127,6 +124,3 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
     card.innerHTML = `<p class="text-muted">No pertenece a ninguna cuadrilla</p>`;
   }
 }
-
-
-</script>
