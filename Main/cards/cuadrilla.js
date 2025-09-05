@@ -1,4 +1,6 @@
 <script>
+// cuadrilla.js
+
 function renderCuadrillaCard(cuadrilla, usuarioActivo) {
   const container = document.getElementById("cuadrilla-container");
   if (!container) return;
@@ -15,9 +17,9 @@ function renderCuadrillaCard(cuadrilla, usuarioActivo) {
 
   mostrarCuadrilla(cuadrilla, usuarioActivo);
 
-  // Manejar chevron al expandir/colapsar
+  // === manejar chevron al expandir/colapsar ===
   container.addEventListener("shown.bs.collapse", e => {
-    const chevron = e.target.closest(".accordion-item").querySelector(".chevron");
+    const chevron = e.target.closest(".border").querySelector(".chevron");
     if (chevron) {
       chevron.classList.remove("fa-chevron-down");
       chevron.classList.add("fa-chevron-up");
@@ -25,7 +27,7 @@ function renderCuadrillaCard(cuadrilla, usuarioActivo) {
   });
 
   container.addEventListener("hidden.bs.collapse", e => {
-    const chevron = e.target.closest(".accordion-item").querySelector(".chevron");
+    const chevron = e.target.closest(".border").querySelector(".chevron");
     if (chevron) {
       chevron.classList.remove("fa-chevron-up");
       chevron.classList.add("fa-chevron-down");
@@ -64,7 +66,7 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
         return 0;
       });
 
-      html += `<div class="accordion modern-accordion" id="accordionCuadrilla">`;
+      html += `<div class="row g-2">`;
       const nombreActivo = (usuarioActivo?.nombre || "").trim().toLowerCase();
 
       integrantes.forEach((emp, idx) => {
@@ -73,27 +75,29 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
         const collapseId = `emp-collapse-${idx}`;
 
         html += `
-          <div class="accordion-item shadow-sm mb-3 rounded-4 overflow-hidden">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed d-flex align-items-center" type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#${collapseId}"
-                      aria-expanded="false"
-                      aria-controls="${collapseId}">
-                <div class="icon-box lg bg-primary-subtle rounded-circle me-3">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="border rounded-3 p-2 h-100">
+              <div class="d-flex align-items-center justify-content-between collapsed"
+                   data-bs-toggle="collapse"
+                   data-bs-target="#${collapseId}"
+                   aria-expanded="false"
+                   aria-controls="${collapseId}"
+                   style="cursor:pointer;">
+                <div class="d-flex align-items-center">
                   ${getIconOrFoto(emp, 44)}
+                  <div class="d-flex flex-column justify-content-center">
+                    <div class="d-flex align-items-center flex-wrap">
+                      <strong class="me-2">${emp.nombre || "-"}</strong>
+                      ${esUsuarioActivo ? `<span class="badge bg-primary-subtle text-primary border border-primary-subtle me-1">Tú</span>` : ""}
+                      ${esLider ? `<span class="badge bg-warning text-dark">Líder</span>` : ""}
+                    </div>
+                    <small class="text-muted">${emp.rol_en_cuadrilla || emp.rol || "-"}</small>
+                  </div>
                 </div>
-                <div class="flex-grow-1">
-                  <h6 class="mb-0">${emp.nombre || "-"}</h6>
-                  <small class="text-muted">${emp.rol_en_cuadrilla || emp.rol || "-"}</small>
-                </div>
-                ${esUsuarioActivo ? `<span class="badge bg-primary-subtle text-primary rounded-pill px-3 me-2">Tú</span>` : ""}
-                ${esLider ? `<span class="badge bg-warning text-dark rounded-pill px-3 me-2">Líder</span>` : ""}
-                <i class="fa-solid fa-chevron-down text-muted ms-2 chevron"></i>
-              </button>
-            </h2>
-            <div id="${collapseId}" class="accordion-collapse collapse">
-              <div class="accordion-body bg-light-subtle">
+                <i class="fa-solid fa-chevron-down text-muted chevron"></i>
+              </div>
+
+              <div id="${collapseId}" class="collapse mt-2">
                 <small><i class="fa-solid fa-id-card me-1"></i> <b>DNI:</b> ${emp.dni || "-"}</small><br>
                 <small><i class="fa-solid fa-location-dot me-1"></i> <b>Dirección:</b> ${emp.direccion || "-"}</small><br>
                 <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small><br>
