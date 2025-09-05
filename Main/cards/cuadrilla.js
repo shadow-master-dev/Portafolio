@@ -88,8 +88,6 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
                 <small><i class="fa-solid fa-ruler-combined me-1"></i> <b>Pantalón:</b> ${emp.talla_pantalon || "-"}</small><br>
                 <small><i class="fa-solid fa-shoe-prints me-1"></i> <b>Bota:</b> ${emp.talla_bota || "-"}</small>
               </div>
-
-
             </div>
           </div>
         `;
