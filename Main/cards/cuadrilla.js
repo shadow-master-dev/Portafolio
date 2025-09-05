@@ -83,11 +83,12 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
                 <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small><br>
                 <hr class="my-1">
                 <small><i class="fa-solid fa-shirt me-1"></i> <b>Polo:</b> ${emp.talla_polo || "-"}</small><br>
-                <small><i class="fa-solid fa-vest me-1"></i> <b>Chaleco:</b> ${emp.talla_chaleco || "-"}</small><br>
-                <small><i class="fa-solid fa-jacket me-1"></i> <b>Casaca:</b> ${emp.talla_casaca || "-"}</small><br>
+                <small><i class="fa-solid fa-person me-1"></i> <b>Chaleco:</b> ${emp.talla_chaleco || "-"}</small><br>
+                <small><i class="fa-solid fa-user-tie me-1"></i> <b>Casaca:</b> ${emp.talla_casaca || "-"}</small><br>
                 <small><i class="fa-solid fa-ruler-combined me-1"></i> <b>Pantalón:</b> ${emp.talla_pantalon || "-"}</small><br>
                 <small><i class="fa-solid fa-shoe-prints me-1"></i> <b>Bota:</b> ${emp.talla_bota || "-"}</small>
               </div>
+
 
             </div>
           </div>
