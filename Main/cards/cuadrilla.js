@@ -80,8 +80,15 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
               <div id="${collapseId}" class="collapse mt-2">
                 <small><i class="fa-solid fa-id-card me-1"></i> <b>DNI:</b> ${emp.dni || "-"}</small><br>
                 <small><i class="fa-solid fa-location-dot me-1"></i> <b>Dirección:</b> ${emp.direccion || "-"}</small><br>
-                <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small>
+                <small><i class="fa-solid fa-phone me-1"></i> <b>Teléfono:</b> ${emp.telefono || "-"}</small><br>
+                <hr class="my-1">
+                <small><i class="fa-solid fa-shirt me-1"></i> <b>Polo:</b> ${emp.talla_polo || "-"}</small><br>
+                <small><i class="fa-solid fa-vest me-1"></i> <b>Chaleco:</b> ${emp.talla_chaleco || "-"}</small><br>
+                <small><i class="fa-solid fa-jacket me-1"></i> <b>Casaca:</b> ${emp.talla_casaca || "-"}</small><br>
+                <small><i class="fa-solid fa-ruler-combined me-1"></i> <b>Pantalón:</b> ${emp.talla_pantalon || "-"}</small><br>
+                <small><i class="fa-solid fa-shoe-prints me-1"></i> <b>Bota:</b> ${emp.talla_bota || "-"}</small>
               </div>
+
             </div>
           </div>
         `;
