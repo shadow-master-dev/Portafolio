@@ -60,6 +60,6 @@ function setUserHeader(data) {
 
   // Renderizar cards
   renderSupervisorCard(u.supervisor);
-  mostrarCuadrilla(u.cuadrilla, u);
+  renderCuadrillaCard(u.cuadrilla, u);
   renderSucursalesCard(u.sucursales);
 }
