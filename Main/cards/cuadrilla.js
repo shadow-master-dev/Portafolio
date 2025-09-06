@@ -29,6 +29,7 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
         return 0;
       });
 
+      // === acordeón grupo exclusivo ===
       html += `<div class="accordion" id="accordionCuadrilla">`;
       const nombreActivo = (usuarioActivo?.nombre || "").trim().toLowerCase();
 
@@ -56,7 +57,9 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
                 </div>
               </button>
             </h2>
-            <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="${headingId}" data-bs-parent="#accordionCuadrilla">
+            <div id="${collapseId}" class="accordion-collapse collapse" 
+                 aria-labelledby="${headingId}" 
+                 data-bs-parent="#accordionCuadrilla">
               <div class="accordion-body bg-light">
                 <div class="p-3 rounded-3 border border-primary-subtle">
                   <small><i class="fa-solid fa-id-card me-1"></i> <b>DNI:</b> ${emp.dni || "-"}</small><br>
@@ -75,7 +78,7 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
         `;
       });
 
-      html += `</div>`;
+      html += `</div>`; // cierre acordeón
     } else {
       html += `<p class="text-muted">No hay integrantes en la cuadrilla</p>`;
     }
