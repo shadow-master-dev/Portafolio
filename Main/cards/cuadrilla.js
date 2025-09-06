@@ -123,33 +123,4 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
     }
     card.innerHTML = `<p class="text-muted">No pertenece a ninguna cuadrilla</p>`;
   }
-} actualizar estilo <div class="accordion-item shadow-sm mb-3 rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#modern-collapseOne" aria-expanded="true"
-                            aria-controls="modern-collapseOne">
-                            <div class="d-flex align-items-center w-100">
-                              <div class="icon-box lg bg-primary-subtle rounded-circle me-3">
-                                <i class="bi bi-cloud text-primary fs-4"></i>
-                              </div>
-                              <div>
-                                <h6>Cloud Services</h6>
-                                <p class="mb-0 small">Scalable solutions for your business</p>
-                              </div>
-                              <span
-                                class="ms-auto badge bg-primary-subtle text-primary rounded-pill px-3 me-2">Featured</span>
-                            </div>
-                          </button>
-                        </h2>
-                        <div id="modern-collapseOne" class="accordion-collapse collapse show"
-                          data-bs-parent="#modernAccordion">
-                          <div class="accordion-body bg-primary-subtle">
-                            <div class="p-3 rounded-3 border border-primary">
-                              <p class="mb-0">Our cloud services offer unmatched scalability, reliability, and security.
-                                Deploy applications with ease, scale resources on demand, and only pay for what you use.
-                                With 99.9% uptime guarantee and 24/7 support, your business can operate with confidence.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div> 
+}
