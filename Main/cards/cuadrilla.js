@@ -92,3 +92,23 @@ function mostrarCuadrilla(cuadrilla, usuarioActivo) {
     card.innerHTML = `<p class="text-muted">No pertenece a ninguna cuadrilla</p>`;
   }
 }
+
+
+// cuadrilla.js
+function renderCuadrillaCard(cuadrilla, usuarioActivo) {
+  const container = document.getElementById("cuadrilla-container");
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Cuadrilla</h5>
+        <span id="cuadrilla-estado-badge" class="badge rounded-pill bg-light text-dark">-</span>
+      </div>
+      <div class="card-body" id="cuadrilla-card"></div>
+    </div>
+  `;
+
+  mostrarCuadrilla(cuadrilla, usuarioActivo);
+}
+
